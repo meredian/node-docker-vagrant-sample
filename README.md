@@ -20,19 +20,22 @@ Second pattern can be used to implement multi-instance environment, like sharded
 
 Fact that OS X is not a Linux has some impact on usage of Docker and integrating it with Vagrant. In case of using Linux everything should be a bit easier.
 
-### Install VirtualBox
+## Installation
+### VirtualBox
 
 See detailed guide at https://www.virtualbox.org/
 
-### Install and prepare docker
+### Docker
 
 While any Linux can install docker without extra pain, OS X is not originally a Linux, and it's kernel is not compatible with docker. So we have to run docker-server in VM. There is generic VirtualBox-based solution, called `boot2docker`
 
 Detailed guide about launching docker at OS X I used to progress: http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
 
-### Install Vagrant
+### Vagrant
 
 Download installer at http://www.vagrantup.com/downloads
+
+## Running things up
 
 ### Dockerize your project
 
@@ -40,3 +43,8 @@ Download installer at http://www.vagrantup.com/downloads
  - Build docker image
  - Push docker image to repo (hope you registered it?)
  - Try running image with exposing ports
+
+### Joining docker with vagrant
+
+ - Create `Vagrantfile` (you can start with `vagrant init` command)
+ -

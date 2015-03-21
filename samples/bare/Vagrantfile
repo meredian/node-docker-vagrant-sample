@@ -1,0 +1,29 @@
+# Select docker provider by default
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define "bare_dockerized_server" do |a|
+    a.vm.provider "docker" do |d|
+
+      # Relative path to build docker image
+      d.build_dir = "."
+
+      # Tag compiled docker container
+      d.build_args = ["-t=bare_dockerized_server"]
+
+      # Map ports: array of "host:guest" pairs from container to docker host OS
+      d.ports = ["3000:3000"]
+
+      d.name = "bare_dockerized_server"
+      d.remains_running = true
+
+      # Here we define custom VM for hosting docker, not default boot2docker
+      if RUBY_PLATFORM !~ /linux/i
+        d.vagrant_machine = "dockerhost"
+        d.vagrant_vagrantfile = "./VagrantfileForDocker"
+      end
+    end
+  end
+
+end
