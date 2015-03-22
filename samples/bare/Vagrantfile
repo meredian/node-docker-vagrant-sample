@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
       # Here we define custom VM for hosting docker, not default boot2docker
       if RUBY_PLATFORM !~ /linux/i
         d.vagrant_machine = "dockerhost"
-        d.vagrant_vagrantfile = "./VagrantfileForDocker"
+        d.vagrant_vagrantfile = "./../../Vagrantfile"
       end
     end
   end

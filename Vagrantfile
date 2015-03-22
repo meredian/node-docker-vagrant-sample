@@ -1,3 +1,4 @@
+# Configuration for docker host OS, used by other examples
 Vagrant.configure(2) do |config|
 
   config.vm.provision "docker"
