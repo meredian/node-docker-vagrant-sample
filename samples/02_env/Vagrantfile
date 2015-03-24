@@ -1,0 +1,30 @@
+# Select docker provider by default
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+def update_docker_host_if_required docker
+  if RUBY_PLATFORM !~ /linux/i
+    # Here we define custom VM for hosting docker, not default boot2docker
+    docker.vagrant_machine = "02_env_dockerhost"
+    docker.vagrant_vagrantfile = "./VagrantfileForDocker"
+  end
+end
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define "02_env_redis" do |a|
+    a.vm.provider "docker" do |docker|
+
+      # Use redis image from docker registry
+      docker.image = "redis:latest"
+
+      # Map ports: array of "host:guest" pairs from container to docker host OS
+      docker.ports = ["44010:6379"]
+
+      docker.name = "02_env_redis"
+      docker.remains_running = true
+
+      update_docker_host_if_required docker
+    end
+  end
+
+end
