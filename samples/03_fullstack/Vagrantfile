@@ -1,0 +1,52 @@
+# Select docker provider by default
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+def update_docker_host_if_required docker
+  if RUBY_PLATFORM !~ /linux/i
+    # Here we define custom VM for hosting docker, not default boot2docker
+    docker.vagrant_machine = "03_fullstack_dockerhost"
+    docker.vagrant_vagrantfile = "./VagrantfileForDocker"
+  end
+end
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define "03_fullstack_redis" do |a|
+    a.vm.provider "docker" do |docker|
+
+      # Use redis image from docker registry
+      docker.image = "redis:latest"
+
+      # Map ports: array of "host:guest" pairs from container to docker host OS
+      # docker.ports = ["44021:6379"]
+
+      docker.name = "03_fullstack_redis"
+      docker.remains_running = true
+
+      update_docker_host_if_required docker
+    end
+  end
+
+  config.vm.define "03_fullstack_server" do |a|
+    a.vm.provider "docker" do |docker|
+      # Path to build docker container
+      docker.build_dir = "."
+
+      # Tag compiled docker container
+      docker.build_args = ["-t=03_fullstack_server"]
+
+      # Link redis to our server container
+      docker.link "03_fullstack_redis:redis"
+
+      # Map ports: array of "host:guest" pairs from container to docker host OS
+      docker.ports = ["44020:3000"]
+
+      docker.name = "03_fullstack_server"
+      docker.remains_running = true
+
+      update_docker_host_if_required docker
+    end
+  end
+
+end

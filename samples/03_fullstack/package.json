@@ -1,0 +1,15 @@
+{
+  "name": "03_fullstack",
+  "version": "1.0.0",
+  "description": "Server with Redis dependency - just as sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anton Sidelnikov <ndmeredian@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3",
+    "redis": "^0.12.1"
+  }
+}

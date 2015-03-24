@@ -1,0 +1,27 @@
+# Configuration for docker host OS
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
+Vagrant.configure(2) do |config|
+
+  config.vm.provision "docker"
+
+  # Copy from some manual (with comment):
+  #
+  # The following line terminates all ssh connections. Therefore
+  # Vagrant will be forced to reconnect.
+  # That's a workaround to have the docker command in the PATH
+  config.vm.provision "shell", inline: "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
+
+  # Define vm name
+  config.vm.define "03_fullstack_dockerhost"
+  config.vm.box = "chef/centos-7.0"
+
+  # Forward port from docker host OS to our main OS (OS X or Windows)
+  # Port 44020 is our external application port
+  config.vm.network :forwarded_port, guest: 44020, host: 44020
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "03_fullstack_dockerhost"
+  end
+
+end
