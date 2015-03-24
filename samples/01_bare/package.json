@@ -1,5 +1,5 @@
 {
-  "name": "bare",
+  "name": "01_bare",
   "version": "1.0.0",
   "description": "Bare server without any dependencies",
   "main": "index.js",

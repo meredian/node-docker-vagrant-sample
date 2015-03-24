@@ -1,7 +1,7 @@
 Bare Node.js server
 ===================
 
-Server without any dependencies, just some modules to install. Chech `localhost:3000` to see if it is working
+Server without any dependencies, just some modules to install. Check `localhost:44000` to see if it is working
 
 To run server after installing vagrant and docker:
 
