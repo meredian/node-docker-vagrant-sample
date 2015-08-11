@@ -3,6 +3,8 @@ Node-Docker-Vagrant sample
 
 Samples for creating web-project environment with Node.js, Docker and Vagrant
 
+#### Note: At current moment I would prefer docker-compose to Vagrant, it provides much more convenient integration. See [node-docker-compose-sample](https://github.com/meredian/node-docker-compose-sample)
+
 ## What's it about
 
 Repo represents a sample of creating web-based applicaion environment, which will allow you to implement and raise any infrastructure without manually installing service components.
